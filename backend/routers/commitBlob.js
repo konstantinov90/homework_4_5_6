@@ -1,13 +1,12 @@
-import getBlobContent from '../common/getBlobContent';
-import getAllBranches from '../common/getAllBranches';
+import GitHelper from '../GitHelper'
 
 const commitBlob = (req, res) => {
     const {hash} = req.params;
     let path = req.params[0]; // params[0] - это "*" в роутер
 
     Promise.all([
-        getAllBranches(),
-        getBlobContent(hash, path)
+        GitHelper.getAllBranches(),
+        GitHelper.getBlobContent(hash, path)
     ])
         .then(([branches, content]) => {
 

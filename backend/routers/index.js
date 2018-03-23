@@ -1,11 +1,10 @@
-import getDefaultBranch from '../common/getDefaultBranch';
+import GitHelper from '../GitHelper'
 
 const index = (req, res) => {
     Promise.resolve()
-        .then(getDefaultBranch)
+        .then(GitHelper.getDefaultBranch)
         .then((defaultBranch) => {
-            defaultBranch = defaultBranch.trim();
-            res.redirect(`/${defaultBranch}`)
+            res.redirect(`/${defaultBranch}`);
         })
         .catch(console.log);
 };

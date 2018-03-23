@@ -32,8 +32,13 @@
     "start": "node bin/www.js",
     "build": "npm run build-dev",
     "build-dev": "NODE_ENV=development webpack",
+    "build-prod": "NODE_ENV=production webpack -p",
+    "dev": "webpack --watch & npm start",
+
+    "clear": "rm -rf ./public && echo public has been removed",
+
     "lint": "eslint \"**/*.js\" eslint --ignore-path .gitignore",
-    "test": "mocha \"**/*.test.js\""
+    "test": "mocha \"tests/unit/*.spec.js\""
   },
   "author": "klester",
   "license": "ISC"

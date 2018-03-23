@@ -1,9 +1,4 @@
-import getContentTreeByPath from '../common/getContentTreeByPath';
-import getAllCommitsOfBranch from '../common/getAllCommitsOfBranch';
-import transformStringTreeToArray from '../common/transformStringTreeToArray';
-import transformStringCommitsToArray from '../common/transformStringCommitsToArray';
-import getAllBranches from '../common/getAllBranches';
-import sortTreeByType from "../common/sortTreeByType";
+import GitHelper from '../GitHelper'
 
 const branchTree = (req, res) => {
     const {branch} = req.params;
@@ -14,11 +9,9 @@ const branchTree = (req, res) => {
     path = resultPath[1];
 
     Promise.all([
-        getAllBranches(),
-        getContentTreeByPath(branch, path)
-            .then(transformStringTreeToArray),
-        getAllCommitsOfBranch(branch)
-            .then(transformStringCommitsToArray),
+        GitHelper.getAllBranches(),
+        GitHelper.getContentTreeByPath(branch, path),
+        GitHelper.getAllCommitsOfBranch(branch)
     ])
         .then(([branches, tree, commits]) => {
         // если путь после /master/tree содержит "/" значит это вложенная дерриктория
@@ -49,9 +42,6 @@ const branchTree = (req, res) => {
                 name: '..',
                 path: `${backPath}`
             });
-
-            // сортируем в правильном порядке
-            tree = sortTreeByType(tree);
 
             res.render('branch', {branch, branches, tree, commits});
         })

@@ -1,6 +1,4 @@
-import getAllBranches from '../common/getAllBranches';
-import getContentTreeByPath from '../common/getContentTreeByPath';
-import transformStringTreeToArray from '../common/transformStringTreeToArray';
+import GitHelper from '../GitHelper';
 
 const commitTree = (req, res) => {
     const {hash} = req.params;
@@ -12,9 +10,8 @@ const commitTree = (req, res) => {
 
 
     Promise.all([
-        getAllBranches(),
-        getContentTreeByPath(hash, path)
-            .then(transformStringTreeToArray)
+        GitHelper.getAllBranches(),
+        GitHelper.getContentTreeByPath(hash, path)
     ])
         .then(([branches, tree]) => {
             // если путь после /master/tree содержит "/" значит это вложенная дерриктория

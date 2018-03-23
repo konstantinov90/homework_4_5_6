@@ -1,22 +1,13 @@
-import getAllBranches from '../common/getAllBranches';
-import getContentTreeByPath from '../common/getContentTreeByPath';
-import transformStringTreeToArray from '../common/transformStringTreeToArray';
-import sortTreeByType from "../common/sortTreeByType";
-
+import GitHelper from '../GitHelper'
 
 const commit = (req, res) => {
     const {hash} = req.params;
 
     Promise.all([
-        getAllBranches(),
-        getContentTreeByPath(hash, '/')
-            .then(transformStringTreeToArray)
+        GitHelper.getAllBranches(),
+        GitHelper.getContentTreeByPath(hash, '/')
     ])
         .then(([branches, tree]) => {
-
-            // сортируем в правильном порядке
-            tree = sortTreeByType(tree);
-
             res.render('commit', {hash, branches, tree});
         });
 };
