@@ -27,17 +27,16 @@ b64a411, first commit, klester, Fri Mar 23 22:14:45 2018 +0300`;
 //     }
 // ];
 
-describe("getAllCommitsOfBranch", function () {
+describe('getAllCommitsOfBranch', function () {
 
-    it("Получает список комитов ветки", function (done) {
+    it('Получает список комитов ветки', function (done) {
         // assert.include(getAllCommitsOfBranch(inputData), result);
         Promise.resolve()
             .then(() => getAllCommitsOfBranch(inputData, myPath))
             .then((data) => {
                 assert.include(getAllCommitsOfBranch(data), data);
                 done();
-            })
+            });
         // console.log(getAllCommitsOfBranch(inputData, myPath));
     });
-
 });

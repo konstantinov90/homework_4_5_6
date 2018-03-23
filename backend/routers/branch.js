@@ -1,4 +1,5 @@
-import GitHelper from '../GitHelper'
+import GitHelper from '../GitHelper';
+
 const path = process.env.ROOT;
 
 const branchRouter = (req, res) => {
@@ -27,8 +28,8 @@ const branchRouter = (req, res) => {
                 GitHelper.getContentTreeByPath(branch, '/'),
             ])
                 .then(([commits, tree]) => {
-                        res.render('branch', {branch, branches:  saveBranches, tree, commits});
-                    })
+                    res.render('branch', {branch, branches: saveBranches, tree, commits});
+                });
         })
         .catch((e) => {
             const message = e.message;
