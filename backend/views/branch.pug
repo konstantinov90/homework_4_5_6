@@ -1,0 +1,62 @@
+extends layout
+include mixin/svgFile
+include mixin/svgFolder
+
+block nav
+    div.nav__title.
+        Ветки
+    each br in branches
+        if (br === branch)
+            div.nav__row.nav__row_active
+                a(href=`/${br}` class="nav__row-link")= br
+        else
+            div.nav__row
+                a(href=`/${br}` class="nav__row-link")= br
+
+
+block content
+    div.content__main
+        div.content__tree
+            div.content__tree-title Дерево
+
+            each elem in tree
+                div.content__tree-row
+                    //- elem.path есть только в поддеревьях (в дереве главной ветки, например master, нету)
+                    if elem.path
+                        if elem.first
+                            +svgFolder
+                            a(href=`/${elem.path}` class="content__tree-item")= elem.name
+                        else if elem.type === 'tree'
+                            +svgFolder
+                            a(href=`/${branch}/tree/${elem.path}` class="content__tree-item")= elem.name
+                        else
+                            +svgFile
+                            a(href=`/${branch}/blob/${elem.path}` class="content__tree-item")= elem.name
+                    else
+                        if elem.type === 'tree'
+                            +svgFolder
+                            a(href=`/${branch}/tree/${elem.name}` class="content__tree-item")= elem.name
+                        else
+                            +svgFile
+                            a(href=`/${branch}/blob/${elem.name}` class="content__tree-item")= elem.name
+
+
+        div.content__commits
+            div.content__commits-title Комиты
+
+            div.content__commits-header
+                div.content__commits-header-item.content__commits-header-title.
+                    название
+                div.content__commits-header-item.content__commits-header-commiter.
+                    автор
+                div.content__commits-header-item.content__commits-header-date.
+                    дата
+
+            each commit in commits
+                div.content__commits-row
+                    div.content__commits-row-title
+                        a(href= `/commit/${commit.hash}`)= commit.title
+                    div.content__commits-row-commiter
+                        span= commit.committer
+                    div.content__commits-row-date
+                        span= commit.date

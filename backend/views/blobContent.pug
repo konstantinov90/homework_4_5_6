@@ -1,0 +1,13 @@
+extends layout
+
+block nav
+    div.nav__title.
+        Ветки
+    ol
+        each branch in branches
+            li
+                a(href=`/${branch}`)= branch
+
+block content
+    a(href= `/${backUrl}`) Вернуться назад
+    pre.content__blob= content

@@ -1,0 +1,14 @@
+@import "./nav.css";
+@import "./content.css";
+@import "./svg.css";
+
+body {
+    margin: 0;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+    font-size: 18px;
+    font-family: sans-serif;
+}

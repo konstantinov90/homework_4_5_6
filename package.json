@@ -1,0 +1,40 @@
+{
+  "name": "homework_4_5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "moment": "^2.21.0",
+    "open": "0.0.5",
+    "pug": "^2.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "autoprefixer": "^8.1.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^8.0.0-beta.2",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-config-yandex": "^1.0.6",
+    "eslint-plugin-import": "^2.9.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "mocha": "^5.0.4",
+    "postcss-loader": "^2.1.3",
+    "style-loader": "^0.20.3",
+    "webpack": "^3.11.0"
+  },
+  "scripts": {
+    "start": "node bin/www.js",
+    "build": "npm run build-dev",
+    "build-dev": "NODE_ENV=development webpack",
+    "lint": "eslint \"**/*.js\" eslint --ignore-path .gitignore",
+    "test": "mocha \"**/*.test.js\""
+  },
+  "author": "klester",
+  "license": "ISC"
+}
