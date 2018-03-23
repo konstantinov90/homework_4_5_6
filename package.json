@@ -30,15 +30,16 @@
   },
   "scripts": {
     "start": "node bin/www.js",
+    "start-dev": "nodemon bin/www.js",
     "build": "npm run build-dev",
     "build-dev": "NODE_ENV=development webpack",
     "build-prod": "NODE_ENV=production webpack -p",
-    "dev": "webpack --watch & npm start",
+    "dev": "webpack --watch & npm run start-dev",
 
     "clear": "rm -rf ./public && echo public has been removed",
 
     "lint": "eslint \"**/*.js\" eslint --ignore-path .gitignore",
-    "test": "mocha \"tests/unit/*.spec.js\""
+    "test": "mocha --compilers js:babel-core/register \"tests/unit/*.spec.js\""
   },
   "author": "klester",
   "license": "ISC"
