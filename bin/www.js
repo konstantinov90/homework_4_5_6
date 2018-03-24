@@ -6,11 +6,13 @@ const open = require('open');
 const options = require('../options');
 
 // default options;
-const {
+let {
     myPath = path.join(__dirname, '../'),
     host = 'localhost',
-    port = 8080
+    port
 } = options;
+
+port = process.env.PORT || port;
 
 process.env.ROOT = myPath;
 
