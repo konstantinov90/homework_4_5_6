@@ -7,7 +7,7 @@ import options from '../options';
 moment.locale(options.timeLocale || 'ru');
 import GitCLI from './GitCLI';
 
-export default class GitHelper {
+export default class GitHandler {
 
     static _sortTreeByType(arr) {
         return arr.sort((a, b) => {
@@ -24,69 +24,35 @@ export default class GitHelper {
     }
 
     static _commitsHandler(commits) {
-        return new Promise( asd => {
-            commits = commits.split('\n');
+        commits = commits.split('\n');
 
-            // приводим данные о коммитах в объект с соответствующими ключами (hash, title, author, date)
-            commits = commits.map(item => {
-                const result = item.split('^^');
+        // приводим данные о коммитах в объект с соответствующими ключами (hash, title, author, date)
+        commits = commits.map(item => {
+            const result = item.split('^^^');
 
-                return {
-                    hash: result[0],
-                    title: result[1],
-                    committer: result[2],
-                    date: result[3]
-                };
-            });
+            return {
+                hash: result[0],
+                title: result[1],
+                committer: result[2],
+                date: result[3]
+            };
+        });
 
-            // commits = GitHelper._sortTreeByType(commits);
+        // устанавливаем нужный формат времени
+        commits.map((item) => {
+            item.date = moment(new Date(item.date)).format(options.timeFormat);
+            return item;
+        });
 
-            // устанавливаем нужный формат времени
-            commits.map((item) => {
-                item.date = moment(new Date(item.date)).format(options.timeFormat);
-                return item;
-            });
-
-            resolve(commits);
-        })
+        return commits;
     }
 
     static getAllCommitsOfBranch(branch) {
-        return new Promise((resolve, reject) => {
-            exec(`cd ${path} && git log ${branch} --pretty=format:"%h^^ %s^^ %cn^^ %cd"`, (error, commits, stderr) => {
-                if (error) {
-                    reject(error);
-                }
+        const command = `cd ${path} && git log ${branch} --pretty=format:"%h^^^%s^^^%cn^^^%cd"`;
 
-                if (stderr) {
-                    reject(stderr);
-                }
-
-                commits = commits.split('\n');
-
-                // приводим данные о коммитах в объект с соответствующими ключами (hash, title, author, date)
-                commits = commits.map(item => {
-                    const result = item.split('^^');
-
-                    return {
-                        hash: result[0],
-                        title: result[1],
-                        committer: result[2],
-                        date: result[3]
-                    };
-                });
-
-                // commits = GitHelper._sortTreeByType(commits);
-
-                // устанавливаем нужный формат времени
-                commits.map((item) => {
-                    item.date = moment(new Date(item.date)).format(options.timeFormat);
-                    return item;
-                });
-
-                resolve(commits);
-            });
-        });
+        return Promise.resolve(branch)
+            .then(() => GitCLI.API(command))
+            .then(GitHandler._commitsHandler);
     }
 
     static getContentTreeByPath(hash, myPath) { // hash or name (branch)
@@ -115,7 +81,7 @@ export default class GitHelper {
                 });
 
                 // отсортируем, что бы сначало были все tree, а потом blob объекты
-                GitHelper._sortTreeByType(tree);
+                GitHandler._sortTreeByType(tree);
 
                 resolve(tree);
             });

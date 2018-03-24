@@ -39,6 +39,7 @@
     "clear": "rm -rf ./public && echo public has been removed",
 
     "lint": "eslint \"**/*.js\" eslint --ignore-path .gitignore",
+    "lint-fix": "eslint \"**/*.js\" --fix eslint --ignore-path .gitignore",
     "test": "mocha --compilers js:babel-core/register \"tests/unit/*.spec.js\""
   },
   "author": "klester",
