@@ -3,7 +3,6 @@ const path = process.env.ROOT;
 import fs from 'fs';
 import moment from 'moment';
 
-
 import options from '../options';
 moment.locale(options.timeLocale || 'ru');
 import GitCLI from './GitCLI';
