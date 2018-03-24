@@ -12,6 +12,8 @@ let {
     port
 } = options;
 
+// переопределение порта нужно для heroku
+// теперь порядок приоритетов портов такой: 1. через переменную окружения, 2. через options.js, 3. значение по умолчанию
 port = process.env.PORT || port;
 
 process.env.ROOT = myPath;

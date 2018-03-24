@@ -90,7 +90,8 @@ export default class GitHandler {
 
     static getAllBranches() {
         return new Promise((resolve, reject) => {
-            fs.readdir(`${path}/.git/refs/heads`, (err, files) => {
+            // fs.readdir(`${path}/.git/refs/heads`, (err, files) => {
+            fs.readdir(`.git/refs/heads`, (err, files) => {
                 if (err) {
                     reject(err);
                 }
