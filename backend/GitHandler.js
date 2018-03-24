@@ -51,7 +51,7 @@ export default class GitHandler {
         const command = `cd ${path} && git log ${branch} --pretty=format:"%h^^^%s^^^%cn^^^%cd"`;
 
         return Promise.resolve(branch)
-            .then(() => GitCLI.API(command))
+            .then(() => GitCLI.api(command))
             .then(GitHandler._commitsHandler);
     }
 
