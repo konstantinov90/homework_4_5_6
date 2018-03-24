@@ -60,9 +60,9 @@ export default class GitHelper {
         });
     }
 
-    static getContentTreeByPath(hash, path) { //hash or name (branch)
+    static getContentTreeByPath(hash, myPath) { // hash or name (branch)
         return new Promise((resolve, reject) => {
-            exec(`git ls-tree ${hash}:./${path}`, (error, tree, stderr) => {
+            exec(`git ls-tree ${hash}:./${myPath}`, (error, tree, stderr) => {
                 if (error) {
                     reject(error);
                 }
@@ -117,9 +117,9 @@ export default class GitHelper {
         });
     }
 
-    static getBlobContent(hash, path) {
+    static getBlobContent(hash, myPath) {
         return new Promise((resolve, reject) => {
-            exec(`git show ${hash}:./${path}`, {maxBuffer: 500 * 1024}, (error, stdout, stderr) => {
+            exec(`git show ${hash}:./${myPath}`, {maxBuffer: 500 * 1024}, (error, stdout, stderr) => {
                 if (error) {
                     reject(error);
                 }
@@ -147,5 +147,5 @@ export default class GitHelper {
                 resolve(stdout.trim());
             });
         });
-    };
+    }
 }

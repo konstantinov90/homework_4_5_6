@@ -1,4 +1,5 @@
-import GitHelper from '../GitHelper'
+import GitHelper from '../GitHelper';
+
 const path = process.env.ROOT;
 
 const branchRouter = (req, res) => {
@@ -22,13 +23,11 @@ const branchRouter = (req, res) => {
         .then(() => {
             return Promise.all([
                 GitHelper.getAllCommitsOfBranch(branch),
-
-                // здесь по hashBranch достается список содержимого ветки (tree, parent, и тд)
                 GitHelper.getContentTreeByPath(branch, '/'),
             ])
                 .then(([commits, tree]) => {
-                        res.render('branch', {branch, branches:  saveBranches, tree, commits});
-                    })
+                    res.render('branch', {branch, branches: saveBranches, tree, commits});
+                });
         })
         .catch((e) => {
             const message = e.message;

@@ -1,4 +1,4 @@
-import GitHelper from '../GitHelper'
+import GitHelper from '../GitHelper';
 
 const branchTree = (req, res) => {
     const {branch} = req.params;
