@@ -1,1 +1,1 @@
-web: node bin/www.js
+web: gsnpm run build && npm run start
