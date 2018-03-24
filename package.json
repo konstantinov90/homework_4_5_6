@@ -29,9 +29,9 @@
     "webpack": "^3.11.0"
   },
   "scripts": {
-    "start": "node bin/www.js",
+    "start": "node bin/www.js ",
     "start-dev": "nodemon bin/www.js",
-    "build": "npm run build-dev",
+    "build": "npm run build-prod",
     "build-dev": "NODE_ENV=development webpack",
     "build-prod": "NODE_ENV=production webpack -p",
     "dev": "webpack --watch & npm run start-dev",
@@ -40,7 +40,7 @@
 
     "lint": "eslint \"**/*.js\" eslint --ignore-path .gitignore",
     "lint-fix": "eslint \"**/*.js\" --fix eslint --ignore-path .gitignore",
-    "test": "mocha --compilers js:babel-core/register \"tests/unit/*.spec.js\""
+    "test": "mocha --require babel-core/register \"tests/unit/*.spec.js\""
   },
   "author": "klester",
   "license": "ISC"
