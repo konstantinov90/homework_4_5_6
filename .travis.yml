@@ -1,8 +1,4 @@
-sudo: false
-language: node_js
-node_js:
-- 'node'
-- 8
-script:
-- npm run lint
-- npm run test
+deploy:
+  provider: heroku
+  api_key:
+    secure: "a10a815b-05df-4e45-a9a5-b5b7b40c2d76"

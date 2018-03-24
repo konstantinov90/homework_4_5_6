@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.16.3",
+    "express-favicon": "^2.0.0",
     "moment": "^2.21.0",
     "open": "0.0.5",
     "pug": "^2.0.1"
@@ -35,9 +36,7 @@
     "build-dev": "NODE_ENV=development webpack",
     "build-prod": "NODE_ENV=production webpack -p",
     "dev": "webpack --watch & npm run start-dev",
-
     "clear": "rm -rf ./public && echo public has been removed",
-
     "lint": "eslint \"**/*.js\" eslint --ignore-path .gitignore",
     "lint-fix": "eslint \"**/*.js\" --fix eslint --ignore-path .gitignore",
     "test": "mocha --require babel-core/register \"tests/unit/*.spec.js\""

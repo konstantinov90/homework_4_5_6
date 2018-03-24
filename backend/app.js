@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const favicon = require('express-favicon');
 
 // routers
 import index from './routers/index';
@@ -18,6 +19,7 @@ app.set('view engine', 'pug');
 app.set('views', './backend/views');
 
 app.use(express.static('public'));
+app.use(favicon(__dirname + '/favicon.ico'));
 
 app.get('/', index);
 
