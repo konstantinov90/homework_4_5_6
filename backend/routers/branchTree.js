@@ -1,4 +1,4 @@
-import GitHelper from '../GitHelper';
+import GitHandler from '../GitHandler';
 
 const branchTree = (req, res) => {
     const {branch} = req.params;
@@ -9,9 +9,9 @@ const branchTree = (req, res) => {
     path = resultPath[1];
 
     Promise.all([
-        GitHelper.getAllBranches(),
-        GitHelper.getContentTreeByPath(branch, path),
-        GitHelper.getAllCommitsOfBranch(branch)
+        GitHandler.getAllBranches(),
+        GitHandler.getContentTreeByPath(branch, path),
+        GitHandler.getAllCommitsOfBranch(branch)
     ])
         .then(([branches, tree, commits]) => {
         // если путь после /master/tree содержит "/" значит это вложенная дерриктория

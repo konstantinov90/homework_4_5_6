@@ -1,11 +1,11 @@
-import GitHelper from '../GitHelper';
+import GitHandler from '../GitHandler';
 
 const commit = (req, res) => {
     const {hash} = req.params;
 
     Promise.all([
-        GitHelper.getAllBranches(),
-        GitHelper.getContentTreeByPath(hash, '/')
+        GitHandler.getAllBranches(),
+        GitHandler.getContentTreeByPath(hash, '/')
     ])
         .then(([branches, tree]) => {
             res.render('commit', {hash, branches, tree});

@@ -1,8 +1,8 @@
-import GitHelper from '../GitHelper';
+import GitHandler from '../GitHandler';
 
 const index = (req, res) => {
     Promise.resolve()
-        .then(GitHelper.getDefaultBranch)
+        .then(GitHandler.getDefaultBranch)
         .then((defaultBranch) => {
             res.redirect(`/${defaultBranch}`);
         })

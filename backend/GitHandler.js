@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import options from '../options';
 moment.locale(options.timeLocale || 'ru');
+import GitCLI from './GitCLI';
 
 export default class GitHelper {
 
@@ -22,9 +23,37 @@ export default class GitHelper {
         });
     }
 
+    static _commitsHandler(commits) {
+        return new Promise( asd => {
+            commits = commits.split('\n');
+
+            // приводим данные о коммитах в объект с соответствующими ключами (hash, title, author, date)
+            commits = commits.map(item => {
+                const result = item.split('^^');
+
+                return {
+                    hash: result[0],
+                    title: result[1],
+                    committer: result[2],
+                    date: result[3]
+                };
+            });
+
+            // commits = GitHelper._sortTreeByType(commits);
+
+            // устанавливаем нужный формат времени
+            commits.map((item) => {
+                item.date = moment(new Date(item.date)).format(options.timeFormat);
+                return item;
+            });
+
+            resolve(commits);
+        })
+    }
+
     static getAllCommitsOfBranch(branch) {
         return new Promise((resolve, reject) => {
-            exec(`cd ${path} && git log ${branch} --pretty=format:"%h, %s, %cn, %cd"`, (error, commits, stderr) => {
+            exec(`cd ${path} && git log ${branch} --pretty=format:"%h^^ %s^^ %cn^^ %cd"`, (error, commits, stderr) => {
                 if (error) {
                     reject(error);
                 }
@@ -37,7 +66,7 @@ export default class GitHelper {
 
                 // приводим данные о коммитах в объект с соответствующими ключами (hash, title, author, date)
                 commits = commits.map(item => {
-                    const result = item.split(',');
+                    const result = item.split('^^');
 
                     return {
                         hash: result[0],

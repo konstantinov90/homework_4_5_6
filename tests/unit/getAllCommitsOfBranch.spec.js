@@ -1,4 +1,4 @@
-import GitHelper from '../../backend/GitHelper';
+import GitHelper from '../../backend/GitHandler';
 import chai from 'chai';
 import options from '../../options';
 const {timeFormat = 'LLL', timeLocale = 'ru', myPath} = options;

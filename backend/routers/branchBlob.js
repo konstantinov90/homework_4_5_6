@@ -1,12 +1,12 @@
-import GitHelper from '../GitHelper';
+import GitHandler from '../GitHandler';
 
 const branchTree = (req, res) => {
     const {branch} = req.params;
     let path = req.params[0]; // params[0] - это "*" в роутере
 
     Promise.all([
-        GitHelper.getAllBranches(),
-        GitHelper.getBlobContent(branch, path)
+        GitHandler.getAllBranches(),
+        GitHandler.getBlobContent(branch, path)
     ])
         .then(([branches, content]) => {
 

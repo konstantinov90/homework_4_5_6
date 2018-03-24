@@ -1,4 +1,4 @@
-import GitHelper from '../GitHelper';
+import GitHandler from '../GitHandler';
 
 const path = process.env.ROOT;
 
@@ -7,7 +7,7 @@ const branchRouter = (req, res) => {
     let saveBranches;
 
     Promise.resolve()
-        .then(GitHelper.getAllBranches) // получаем список всех существующих веток
+        .then(GitHandler.getAllBranches) // получаем список всех существующих веток
         .then((branches) => {
             saveBranches = branches; // сохраняем в переменной, что бы не тащить её через промисы
 
@@ -15,15 +15,15 @@ const branchRouter = (req, res) => {
             const isExist = branches.includes(branch);
 
             if (isExist) {
-                return GitHelper.readFile(`${path}/.git/refs/heads/${branch}`);
+                return GitHandler.readFile(`${path}/.git/refs/heads/${branch}`);
             } else {
                 return Promise.reject(new Error('not exist'));
             }
         })
         .then(() => {
             return Promise.all([
-                GitHelper.getAllCommitsOfBranch(branch),
-                GitHelper.getContentTreeByPath(branch, '/'),
+                GitHandler.getAllCommitsOfBranch(branch),
+                GitHandler.getContentTreeByPath(branch, '/'),
             ])
                 .then(([commits, tree]) => {
                     res.render('branch', {branch, branches: saveBranches, tree, commits});

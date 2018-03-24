@@ -1,4 +1,4 @@
-import GitHelper from '../GitHelper';
+import GitHandler from '../GitHandler';
 
 const commitTree = (req, res) => {
     const {hash} = req.params;
@@ -10,8 +10,8 @@ const commitTree = (req, res) => {
 
 
     Promise.all([
-        GitHelper.getAllBranches(),
-        GitHelper.getContentTreeByPath(hash, path)
+        GitHandler.getAllBranches(),
+        GitHandler.getContentTreeByPath(hash, path)
     ])
         .then(([branches, tree]) => {
             // если путь после /master/tree содержит "/" значит это вложенная дерриктория
