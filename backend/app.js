@@ -3,17 +3,17 @@ const app = express();
 const favicon = require('express-favicon');
 
 // routers
-import index from './routers/index';
+const index = require('./routers/index');
 
-import branchRouter from './routers/branch';
-import branchTree from './routers/branchTree';
-import branchBlob from './routers/branchBlob';
+const branchRouter = require('./routers/branch');
+const branchTree = require('./routers/branchTree');
+const branchBlob = require('./routers/branchBlob');
 
-import commit from './routers/commit';
-import commitTree from './routers/commitTree';
-import commitBlob from './routers/commitBlob';
+const commit = require('./routers/commit');
+const commitTree = require('./routers/commitTree');
+const commitBlob = require('./routers/commitBlob');
 
-import notFound from './routers/notFound';
+const notFound = require('./routers/notFound');
 
 app.set('view engine', 'pug');
 app.set('views', './backend/views');

@@ -1,5 +1,5 @@
-import GitHandler from '../GitHandler';
-import FS from '../FS';
+const GitHandler = require('../GitHandler');
+const FS = require('../FS');
 const path = process.env.ROOT;
 
 const branchRouter = (req, res) => {
@@ -40,4 +40,4 @@ const branchRouter = (req, res) => {
         });
 };
 
-export default branchRouter;
+module.exports = branchRouter;

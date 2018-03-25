@@ -1,5 +1,5 @@
 // для поддержки import/export
-require('babel-register');
+// require('babel-register');
 const path = require('path');
 // const open = require('open');
 

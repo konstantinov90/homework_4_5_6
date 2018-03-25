@@ -1,6 +1,6 @@
 const {exec} = require('child_process');
 
-export default class GitCLI {
+class GitCLI {
     static command(str, opt = {}) {
         return new Promise((resolve, reject) => {
             exec(str, opt, (error, commits, stderr) => {
@@ -17,3 +17,5 @@ export default class GitCLI {
         });
     }
 }
+
+module.exports = GitCLI;

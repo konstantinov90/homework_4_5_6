@@ -1,4 +1,4 @@
-import GitHandler from '../GitHandler';
+const GitHandler = require('../GitHandler');
 
 const commitTree = (req, res) => {
     const {hash} = req.params;
@@ -48,4 +48,4 @@ const commitTree = (req, res) => {
         .catch(console.log);
 };
 
-export default commitTree;
+module.exports = commitTree;

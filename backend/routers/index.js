@@ -1,4 +1,4 @@
-import GitHandler from '../GitHandler';
+const GitHandler = require('../GitHandler');
 
 const index = (req, res) => {
     Promise.resolve()
@@ -9,4 +9,4 @@ const index = (req, res) => {
         .catch(console.log);
 };
 
-export default index;
+module.exports = index;

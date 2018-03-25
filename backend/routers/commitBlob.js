@@ -1,4 +1,4 @@
-import GitHandler from '../GitHandler';
+const GitHandler = require('../GitHandler');
 
 const commitBlob = (req, res) => {
     const {hash} = req.params;
@@ -41,4 +41,4 @@ const commitBlob = (req, res) => {
         });
 };
 
-export default commitBlob;
+module.exports = commitBlob;

@@ -1,6 +1,6 @@
-import fs from 'fs';
+const fs = require('fs');
 
-export default class FS {
+class FS {
     static readFile(readPath) {
         return new Promise((resolve, reject) => {
             fs.readFile(readPath, (err, data) => {
@@ -25,3 +25,5 @@ export default class FS {
         });
     }
 }
+
+module.exports = FS;

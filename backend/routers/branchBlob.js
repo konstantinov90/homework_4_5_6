@@ -1,4 +1,4 @@
-import GitHandler from '../GitHandler';
+const GitHandler = require('../GitHandler');
 
 const branchTree = (req, res) => {
     const {branch} = req.params;
@@ -41,4 +41,4 @@ const branchTree = (req, res) => {
         });
 };
 
-export default branchTree;
+module.exports = branchTree;

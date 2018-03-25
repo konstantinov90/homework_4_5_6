@@ -1,12 +1,13 @@
-import FS from './FS';
-import moment from 'moment';
-import GitCLI from './GitCLI';
+const FS = require('./FS');
+const moment = require('moment');
+const GitCLI = require('./GitCLI');
 
-import config from '../config';
+const config = require('../config');
+
 moment.locale(config.timeLocale || 'ru');
 const path = process.env.ROOT;
 
-export default class GitHandler {
+class GitHandler {
 
     static _sortTreeByType(arr) {
         return arr.sort((a, b) => {
@@ -103,3 +104,4 @@ export default class GitHandler {
             .then((result) => result.trim());
     }
 }
+module.exports = GitHandler;
