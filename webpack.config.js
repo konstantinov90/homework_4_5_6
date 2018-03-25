@@ -1,5 +1,5 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const DEVELOPMENT = NODE_ENV === 'development';
@@ -27,21 +27,29 @@ module.exports = {
             },
             {
                 test: /.(css)$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {loader: 'css-loader', options: {minimize: true}},
-                        {loader: 'postcss-loader'},
-                    ]
-                })
+                use: [
+                    {loader: 'style-loader'},
+                    {loader: 'css-loader', options: {minimize: true}},
+                    {loader: 'postcss-loader'},
+                ]
             },
+            // {
+            //     test: /.(css)$/,
+            //     use: ExtractTextPlugin.extract({
+            //         fallback: 'style-loader',
+            //         use: [
+            //             {loader: 'css-loader', options: {minimize: true}},
+            //             {loader: 'postcss-loader'},
+            //         ]
+            //     })
+            // },
         ]
     },
 
-    plugins: [
-        new ExtractTextPlugin({
-            filename: '/css/index.css',
-            disable: DEVELOPMENT
-        })
-    ]
+    // plugins: [
+    //     new ExtractTextPlugin({
+    //         filename: '/css/index.css',
+    //         disable: DEVELOPMENT
+    //     })
+    // ]
 };
