@@ -5,5 +5,6 @@ ENV NODE_ENV=production
 RUN apt-get update
 RUN npm install
 RUN npm install --global webpack@3
+RUN npm install --save-dev extract-text-webpack-plugin
 RUN npm run build
 CMD npm start
