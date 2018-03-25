@@ -4,6 +4,6 @@ COPY . .
 ENV NODE_ENV=production
 RUN apt-get update
 RUN npm install
-npm install --global webpack
+RUN npm install --global webpack
 RUN npm run build
 CMD npm start
