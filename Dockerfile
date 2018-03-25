@@ -1,5 +1,5 @@
 FROM node:latest
-WORKDIR /usr/src/app
+WORKDIR .
 COPY . .
 ENV NODE_ENV=production
 RUN apt-get update
