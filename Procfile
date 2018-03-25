@@ -1,1 +1,1 @@
-web: npm run docker
+web: heroku plugins:install heroku-docker && npm run docker
