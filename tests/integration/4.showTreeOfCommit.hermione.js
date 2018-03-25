@@ -68,6 +68,6 @@ describe('4. Дерево файлов комита', () => {
                         const countElements = folders.value.length + blobs.value.length;
                         assert.isAtLeast(countElements, 1, 'Нет элементов в дереве комита');
                     });
-            })
+            });
     });
 });

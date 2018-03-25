@@ -8,14 +8,14 @@ describe('3. Содержимого файла в ветке по умолчан
             .url('/')
             .elements('.content__row-blob-folder')
             .getAttribute('.content__row-blob .content__tree-item', 'href')
-            .then( href => {
+            .then(href => {
                 const randomIndex = randomInteger(0, href.length - 1);
                 return href[randomIndex];
             })
             .then(this.browser.url)
             .getText('.content__blob')
-            .then( text=> {
+            .then(text=> {
                 assert.isString(text, 'Нет содержимого файла');
-            })
+            });
     });
 });

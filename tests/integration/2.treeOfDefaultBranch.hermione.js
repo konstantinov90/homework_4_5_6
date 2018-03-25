@@ -26,7 +26,7 @@ describe('2. Работа с деревом файлов в ветке по ум
                             const length = elements.value.length;
                             assert.isAtLeast(length, 1, 'Комиты отсутствуют');
                         }),
-                ])
+                ]);
             })
             .getAttribute('.content__tree-back', 'href')
             .then(this.browser.url)
@@ -42,7 +42,7 @@ describe('2. Работа с деревом файлов в ветке по ум
                             const length = elements.value.length;
                             assert.isAtLeast(length, 1, 'Комиты отсутствуют');
                         }),
-                ])
-            })
+                ]);
+            });
     });
 });
