@@ -1,6 +1,6 @@
 const options = {
-    myPath: '/home/klester/Projects/shri/homeworks/homework_4_5_6/', // or "/path/path/path/"
-    // myPath: '', // or "/path/path/path/"
+    // myPath: '/home/klester/Projects/shri/homeworks/homework_4_5_6/', // or "/path/path/path/"
+    myPath: '', // or "/path/path/path/"
     host: '0.0.0.0', // example "127.0.0.100"
     port: 8080,
     timeFormat: 'LLLL',
