@@ -4,6 +4,6 @@ COPY . .
 ENV NODE_ENV=production
 RUN apt-get update
 RUN npm install
-RUN npm install webpack 3^ -g
+RUN apt-get install webpack@3 -g
 RUN npm run build
 CMD npm start
