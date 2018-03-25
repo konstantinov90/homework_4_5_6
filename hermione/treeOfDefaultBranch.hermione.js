@@ -17,10 +17,18 @@ describe('2. Работа с деревом файлов в ветке по ум
                 const randomIndex = randomInteger(0, href.length - 1);
                 return href[randomIndex];
             })
-            .then( (url) => this.browser.url(url))
-            // .then( href => {
-            //     console.log(href)
-            // })
+            .then((url) => this.browser.url(url))
+            .then(() => {
+                this.elements('.content__commits-row')
+                    .then(elements => {
+                        const length = elements.value.length;
+
+                        assert.isAtLeast(length, 1, 'Комиты отсутствуют');
+                    });
+            });
+        // .then( href => {
+        //     console.log(href)
+        // })
     });
     //
     // it('имеет в файловом дереве не меньше 1 элемента', function () {

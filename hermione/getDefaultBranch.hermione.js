@@ -7,7 +7,7 @@ describe('1. Ветка по умолчанию', () => {
         return this.browser
             .url('/')
             .getUrl()
-            .then( (url) =>  url.match(/.+\/(\w+)/)[1])
+            .then((url) => url.match(/.+\/(\w+)/)[1])
             .then((branch) => {
                 assert.ok(branch, 'Redirect на "/defaultBranch" не выполнен');
             });
@@ -27,7 +27,7 @@ describe('1. Ветка по умолчанию', () => {
             .elements('.content__tree-row')
             .then(elements => {
                 const length = elements.value.length;
-                assert.isAtLeast(length, 1, `Отсутствуют элементы дерева`);
+                assert.isAtLeast(length, 1, 'Отсутствуют элементы дерева');
             });
     });
 
@@ -37,7 +37,7 @@ describe('1. Ветка по умолчанию', () => {
             .then(elements => {
                 const length = elements.value.length;
 
-                assert.isAtLeast(length, 1, `Комиты отсутствуют`);
+                assert.isAtLeast(length, 1, 'Комиты отсутствуют');
             });
     });
 });

@@ -42,6 +42,7 @@
     "docker-run": "docker run -p 8080:8080 klester-hm",
     "clear": "rm -rf ./public && echo public has been removed",
     "lint": "eslint \"**/*.js\" --ignore-path .gitignore",
+    "lint-fix": "eslint \"**/*.js\" --fix --ignore-path .gitignore",
     "test": "mocha --require babel-core/register \"tests/unit/*.spec.js\""
   },
   "author": "klester",
