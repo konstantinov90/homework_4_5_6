@@ -35,7 +35,7 @@
     "start-dev": "nodemon bin/www.js",
     "build": "npm run clear && npm run build-prod",
     "build-dev": "NODE_ENV=development webpack",
-    "build-prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js -p",
+    "build-prod": "NODE_ENV=production webpack -p",
     "dev": "webpack --watch & npm run start-dev",
     "clear": "rm -rf ./public && echo public has been removed",
     "lint": "eslint \"**/*.js\" --ignore-path .gitignore",
