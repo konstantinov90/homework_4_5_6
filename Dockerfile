@@ -1,6 +1,6 @@
 FROM node:latest
-WORKDIR .
-COPY . .
+ADD . /usr/src/app
+WORKDIR /usr/src/app
 ENV NODE_ENV=production
 RUN apt-get update
 RUN npm install
