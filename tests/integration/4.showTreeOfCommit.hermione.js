@@ -8,7 +8,6 @@ describe('4. Дерево файлов комита', () => {
             .url('/')
             .getAttribute('.content__commit-link', 'href')
             .then((href) => {
-                // будем переходить по случайному комиту
                 const randomIndex = randomInteger(0, href.length - 1);
                 return href[randomIndex];
             })
@@ -31,14 +30,13 @@ describe('4. Дерево файлов комита', () => {
             })
             .getAttribute('.content__row-folder .content__tree-item', 'href')
             .then((href) => {
-                // будем переходить по случайному комиту
                 const randomIndex = randomInteger(0, href.length - 1);
                 return href[randomIndex];
             })
             .then(this.browser.url) // перешли в какой-то каталог комита
             .isExisting('.content__tree')
             .then((exist) => {
-                assert.ok(exist, 'Отсутствует дерево комита');
+                assert.ok(exist, 'Отсутствует дерево папки');
             })
             .then(() => {
                 Promise.all([
@@ -54,6 +52,7 @@ describe('4. Дерево файлов комита', () => {
             })
             .getAttribute('.content__tree-back', 'href')
             .then(this.browser.url)
+            .getText('.content__tree')
             .then((exist) => {
                 assert.ok(exist, 'Отсутствует дерево комита');
             })

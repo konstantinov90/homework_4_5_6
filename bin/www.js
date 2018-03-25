@@ -1,7 +1,7 @@
 // для поддержки import/export
 require('babel-register');
 const path = require('path');
-const open = require('open');
+// const open = require('open');
 
 const options = require('../config');
 
