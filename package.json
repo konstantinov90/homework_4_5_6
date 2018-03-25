@@ -33,7 +33,7 @@
   "scripts": {
     "start": "node bin/www.js ",
     "start-dev": "nodemon bin/www.js",
-    "build": "npm run build-prod",
+    "build": "npm run clear && npm run build-prod",
     "build-dev": "NODE_ENV=development webpack",
     "build-prod": "NODE_ENV=production webpack -p",
     "dev": "webpack --watch & npm run start-dev",
@@ -43,7 +43,8 @@
     "clear": "rm -rf ./public && echo public has been removed",
     "lint": "eslint \"**/*.js\" --ignore-path .gitignore",
     "lint-fix": "eslint \"**/*.js\" --fix --ignore-path .gitignore",
-    "test": "mocha --require babel-core/register \"tests/unit/*.spec.js\""
+    "test": "mocha --require babel-core/register \"tests/unit/*.spec.js\"",
+    "test-hermione": "./node_modules/hermione/bin/hermione ./tests/integration/*.hermione.js"
   },
   "author": "klester",
   "license": "ISC"

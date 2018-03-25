@@ -1,15 +1,15 @@
-// for use import/export
+// для поддержки import/export
 require('babel-register');
 const path = require('path');
 const open = require('open');
 
 const options = require('../config');
 
-// default options;
+// определим параметры по умолчанию;
 let {
     myPath = path.join(__dirname, '../'),
-    host = 'localhost',
-    port
+    host = '0.0.0.0',
+    port = '8080',
 } = options;
 
 // переопределение порта нужно для heroku

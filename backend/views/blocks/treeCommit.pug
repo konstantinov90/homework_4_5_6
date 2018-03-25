@@ -1,0 +1,23 @@
+div.content__tree
+    div.content__tree-title Дерево
+
+    each elem in tree
+        div.content__tree-row(class= elem.type === 'tree' ? 'content__row-folder' : 'content__row-blob')
+            //- elem.path есть только в поддеревьях (в дереве главной ветки, например master, нету)
+            if elem.path
+                if elem.first
+                    +svgFolder
+                    a(href=`/commit/${elem.path}` class="content__tree-item content__tree-back")= elem.name
+                else if elem.type === 'tree'
+                    +svgFolder
+                    a(href=`/commit/${hash}/tree/${elem.path}` class="content__tree-item")= elem.name
+                else
+                    +svgFile
+                    a(href=`/commit/${hash}/blob/${elem.path}` class="content__tree-item")= elem.name
+            else
+                if elem.type === 'tree'
+                    +svgFolder
+                    a(href=`/commit/${hash}/tree/${elem.name}` class="content__tree-item")= elem.name
+                else
+                    +svgFile
+                    a(href=`/commit/${hash}/blob/${elem.name}` class="content__tree-item")= elem.name

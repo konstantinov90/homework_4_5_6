@@ -1,8 +1,9 @@
 const options = {
-    myPath: './', // or "/path/path/path/"
-    host: '0.0.0.0', // example "127.0.0.100"
+    // в myPath "/" после точки обязателен
+    myPath: './', // пример "/path/path/path/"
+    host: '0.0.0.0', // например "127.0.0.100"
     port: 8080,
-    timeFormat: 'LLLL',
+    timeFormat: 'LLL',
     timeLocale: 'ru'
 };
 

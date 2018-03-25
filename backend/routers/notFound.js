@@ -1,5 +1,5 @@
 const notFound = (req, res) => {
-    res.send('notFound');
+    res.render('notFound');
 };
 
 export default notFound;

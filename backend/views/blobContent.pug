@@ -4,8 +4,8 @@ block nav
     div.nav__title.
         Ветки
     each br in branches
-            div.nav__row
-                a(href=`/${br}` class="nav__row-link")= br
+        div.nav__row
+            a(href=`/${br}` class="nav__row-link")= br
 
 block content
     a(href= `/${backUrl}`) Вернуться назад

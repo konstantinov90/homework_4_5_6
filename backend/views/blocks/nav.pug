@@ -1,0 +1,5 @@
+div.nav__title.
+    Ветки
+each br in branches
+    div.nav__row(class= br === branch ? 'nav__row_active' : '')
+        a.nav__row-link(href=`/${br}`)= br

@@ -1,6 +1,8 @@
 @import "./nav.css";
 @import "./content.css";
 @import "./svg.css";
+@import "./trevis.css";
+@import "./notFound.css";
 
 body {
     margin: 0;

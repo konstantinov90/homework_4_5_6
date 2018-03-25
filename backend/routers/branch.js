@@ -33,7 +33,7 @@ const branchRouter = (req, res) => {
             const message = e.message;
 
             if (message === 'not exist') {
-                res.send('NOT FOUND');
+                res.render('notFound');
             } else {
                 console.log(message);
             }

@@ -17,6 +17,11 @@
         overflow: hidden;
         text-overflow: ellipsis;
         cursor: pointer;
+        transition: background-color .5s;
+    }
+
+    .nav__row:hover {
+        background-color: #39424c;
     }
 
     .nav__row_active {

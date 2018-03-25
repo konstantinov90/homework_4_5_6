@@ -1,0 +1,19 @@
+div.content__commits
+    div.content__commits-title Комиты
+
+    div.content__commits-header
+        div.content__commits-header-item.content__commits-header-title.
+            название
+        div.content__commits-header-item.content__commits-header-commiter.
+            автор
+        div.content__commits-header-item.content__commits-header-date.
+            дата
+
+    each commit in commits
+        div.content__commits-row
+            div.content__commits-row-title
+                a.content__commit-link(href= `/commit/${commit.hash}`)= commit.title
+            div.content__commits-row-commiter
+                span= commit.committer
+            div.content__commits-row-date
+                span= commit.date

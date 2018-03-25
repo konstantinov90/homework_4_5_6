@@ -1,0 +1,14 @@
+.trevis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+    .trevis__inner {
+        display: flex;
+    }
+
+    .trevis__name {
+        margin-right: 10px;
+    }
