@@ -7,8 +7,17 @@ script:
 - npm run lint
 - npm run test
 
-deploy:
-  provider: heroku
-  app: thebraid-hw
-  api_key:
-    secure: R+reQZjwdwHrbXUUbLzccb2vn4Y62LsAexOptv2t6kh3h20AIeoG9MpBJ6ZLhizkLyNvqJKB6dk0cZAh2nMf7TI11xtqWWS6/5s0Odc9YdeU3G0iJwyqxAXOwV4aTiDLPhzWZZXnAhgPtmj5ckLdLGxCJAmIUs0S3joZIRcRH0mfCVHb0AgB3otA/HNhDLYQM0NtErO1ECEIs0Fepdu43uQhTJ0s4yftjcJs6udIbykGl3+1WVLRFK2y6qVCXgqcjA+FVcCHESRJ9L2McBCFIfwTzgaU5R6arFqVAaQmuUPWSpKIAT/AzXrQgbTrDToY6ff0KC1lNKpMaH9n0gOV+jHa2vHwceCyjd69BPcIqsfcXJcGXQOZQC4UIWFq/6RUH22W8l+K9fU8mYZZQOydAuJaFAKh3kq3LGy4bz1i2YLgm8jHSRoXnPZsX8W699UUZTcpuH7X/l0C7eCGHn4NGmx7f700L7uG3IcnkSD3eLPft0ToOTjMQgLfXLKP5TPGWuelrJo0FC+9I3vojjnud4HWMuNjMHov1/gNvUsjeYDROkhGVSf+d4wSsH5+YwGsCr0WrSua9vzW4xOXqPyTJZOJoOkE5ycrlo6MrkqSLGCYueuEsZHOnp2YqZSUfdXoUOnrrj1pokaX01s+yjD3vR6DZ2O7wXR/vNDLo1tBNS8=
+service:
+  - docker
+install:
+  - docker build -t test .
+  - docker run -p 80:8080 test
+jobs:
+  include:
+    stage: Deploy
+    deploy:
+      provider: heroku
+      app: thebraid-hw
+      api_key:
+        secure: R+reQZjwdwHrbXUUbLzccb2vn4Y62LsAexOptv2t6kh3h20AIeoG9MpBJ6ZLhizkLyNvqJKB6dk0cZAh2nMf7TI11xtqWWS6/5s0Odc9YdeU3G0iJwyqxAXOwV4aTiDLPhzWZZXnAhgPtmj5ckLdLGxCJAmIUs0S3joZIRcRH0mfCVHb0AgB3otA/HNhDLYQM0NtErO1ECEIs0Fepdu43uQhTJ0s4yftjcJs6udIbykGl3+1WVLRFK2y6qVCXgqcjA+FVcCHESRJ9L2McBCFIfwTzgaU5R6arFqVAaQmuUPWSpKIAT/AzXrQgbTrDToY6ff0KC1lNKpMaH9n0gOV+jHa2vHwceCyjd69BPcIqsfcXJcGXQOZQC4UIWFq/6RUH22W8l+K9fU8mYZZQOydAuJaFAKh3kq3LGy4bz1i2YLgm8jHSRoXnPZsX8W699UUZTcpuH7X/l0C7eCGHn4NGmx7f700L7uG3IcnkSD3eLPft0ToOTjMQgLfXLKP5TPGWuelrJo0FC+9I3vojjnud4HWMuNjMHov1/gNvUsjeYDROkhGVSf+d4wSsH5+YwGsCr0WrSua9vzW4xOXqPyTJZOJoOkE5ycrlo6MrkqSLGCYueuEsZHOnp2YqZSUfdXoUOnrrj1pokaX01s+yjD3vR6DZ2O7wXR/vNDLo1tBNS8=
+      skip_cleanup: true
