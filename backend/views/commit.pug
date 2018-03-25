@@ -20,7 +20,7 @@ block content
             div.content__tree-title Дерево
 
             each elem in tree
-                div.content__tree-row
+                div.content__tree-row.content__row-back(class= elem.type === 'tree' ? 'content__row-folder' : 'content__row-blob')
                     //- elem.path есть только в поддеревьях (в дереве главной ветки, например master, нету)
                     if elem.path
                         if elem.first

@@ -1,11 +1,10 @@
-const {exec} = require('child_process');
-const path = process.env.ROOT;
-import fs from 'fs';
+import FS from './FS';
 import moment from 'moment';
-
-import options from '../options';
-moment.locale(options.timeLocale || 'ru');
 import GitCLI from './GitCLI';
+
+import config from '../config';
+moment.locale(config.timeLocale || 'ru');
+const path = process.env.ROOT;
 
 export default class GitHandler {
 
@@ -40,108 +39,67 @@ export default class GitHandler {
 
         // устанавливаем нужный формат времени
         commits.map((item) => {
-            item.date = moment(new Date(item.date)).format(options.timeFormat);
+            item.date = moment(new Date(item.date)).format(config.timeFormat);
             return item;
         });
 
         return commits;
     }
 
+    static _contentTreeHandler(tree) {
+        // преобразовываем строку в массив, обрезав лишние пробелы
+        tree = tree.trim().split('\n');
+
+        tree = tree.map(item => {
+            const result = item.match(/(\d+)\s(\w+)\s(.+?)\t(.+)/);
+            return {
+                accessMode: result[1],
+                type: result[2],
+                hash: result[3],
+                name: result[4]
+            };
+        });
+
+        // отсортируем, что бы сначало были все tree, а потом blob объекты
+        GitHandler._sortTreeByType(tree);
+        return tree;
+    }
+
     static getAllCommitsOfBranch(branch) {
         const command = `cd ${path} && git log ${branch} --pretty=format:"%h^^^%s^^^%cn^^^%cd"`;
 
         return Promise.resolve(branch)
-            .then(() => GitCLI.api(command))
+            .then(() => GitCLI.command(command))
             .then(GitHandler._commitsHandler);
     }
 
-    static getContentTreeByPath(hash, myPath) { // hash or name (branch)
-        return new Promise((resolve, reject) => {
-            exec(`git ls-tree ${hash}:./${myPath}`, (error, tree, stderr) => {
-                if (error) {
-                    reject(error);
-                }
+    static getContentTreeByPath(hash, myPath) { // hash или имя ветки
+        const command = `git ls-tree ${hash}:./${myPath}`;
 
-                if (stderr) {
-                    reject(stderr);
-                }
-
-                // преобразовываем строку в массив, обрезав лишние пробелы
-                tree = tree.trim().split('\n');
-
-                tree = tree.map(item => {
-                    const result = item.match(/(\d+)\s(\w+)\s(.+?)\t(.+)/);
-
-                    return {
-                        accessMode: result[1],
-                        type: result[2],
-                        hash: result[3],
-                        name: result[4]
-                    };
-                });
-
-                // отсортируем, что бы сначало были все tree, а потом blob объекты
-                GitHandler._sortTreeByType(tree);
-
-                resolve(tree);
-            });
-        });
+        return Promise.resolve()
+            .then(() => GitCLI.command(command))
+            .then(GitHandler._contentTreeHandler);
     }
 
     static getAllBranches() {
-        return new Promise((resolve, reject) => {
-            // fs.readdir(`${path}/.git/refs/heads`, (err, files) => {
-            fs.readdir('.git/refs/heads', (err, files) => {
-                if (err) {
-                    reject(err);
-                }
+        const resultPath = `${path}.git/refs/heads`;
 
-                resolve(files);
-            });
-        });
-    }
-
-    static readFile(readPath) {
-        return new Promise((resolve, reject) => {
-            fs.readFile(readPath, (err, data) => {
-                if (err) {
-                    reject(err);
-                }
-
-                resolve(data);
-            });
-        });
+        return FS.readDir(resultPath);
     }
 
     static getBlobContent(hash, myPath) {
-        return new Promise((resolve, reject) => {
-            exec(`git show ${hash}:./${myPath}`, {maxBuffer: 500 * 1024}, (error, stdout, stderr) => {
-                if (error) {
-                    reject(error);
-                }
+        const command = `git show ${hash}:./${myPath}`;
+        const options = {maxBuffer: 500 * 1024};
 
-                if (stderr) {
-                    reject(stderr);
-                }
-
-                resolve(stdout);
-            });
-        });
+        return Promise.resolve()
+            .then(() => GitCLI.command(command, options));
     }
 
     static getDefaultBranch() {
-        return new Promise((resolve, reject) => {
-            exec('git rev-parse --abbrev-ref HEAD', (error, stdout, stderr) => {
-                if (error) {
-                    reject(error);
-                }
+        const command = 'git rev-parse --abbrev-ref HEAD';
 
-                if (stderr) {
-                    reject(stderr);
-                }
-
-                resolve(stdout.trim());
-            });
-        });
+        return Promise.resolve()
+            .then(() => GitCLI.command(command))
+            .then((result) => result.trim());
     }
 }

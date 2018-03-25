@@ -1,5 +1,5 @@
 import GitHandler from '../GitHandler';
-import GitCLI from '../GitCLI';
+import FS from '../FS';
 const path = process.env.ROOT;
 
 const branchRouter = (req, res) => {
@@ -15,7 +15,7 @@ const branchRouter = (req, res) => {
             const isExist = branches.includes(branch);
 
             if (isExist) {
-                return GitHandler.readFile(`${path}/.git/refs/heads/${branch}`);
+                return FS.readFile(`${path}/.git/refs/heads/${branch}`);
             } else {
                 return Promise.reject(new Error('not exist'));
             }

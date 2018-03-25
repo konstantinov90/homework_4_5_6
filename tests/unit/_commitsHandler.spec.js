@@ -1,9 +1,11 @@
 import GitHandler from '../../backend/GitHandler';
 import chai from 'chai';
-import options from '../../options';
-const {timeFormat = 'LLL', timeLocale = 'ru'} = options;
+import config from '../../config';
+
+const {timeFormat = 'LLL', timeLocale = 'ru'} = config;
 
 import moment from 'moment';
+
 moment.locale(timeLocale);
 
 const assert = chai.assert;
@@ -28,7 +30,6 @@ const result = [
 ];
 
 describe('_commitsHandler', function () {
-
     it('корректно парсит входящую строку', function () {
         assert.deepEqual(_commitsHandler(inputData), result);
     });

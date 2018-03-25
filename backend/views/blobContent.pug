@@ -3,10 +3,9 @@ extends layout
 block nav
     div.nav__title.
         Ветки
-    ol
-        each branch in branches
-            li
-                a(href=`/${branch}`)= branch
+    each br in branches
+            div.nav__row
+                a(href=`/${br}` class="nav__row-link")= br
 
 block content
     a(href= `/${backUrl}`) Вернуться назад

@@ -1,9 +1,9 @@
 const {exec} = require('child_process');
 
 export default class GitCLI {
-    static api(str) {
+    static command(str, opt = {}) {
         return new Promise((resolve, reject) => {
-            exec(str, (error, commits, stderr) => {
+            exec(str, opt, (error, commits, stderr) => {
                 if (error) {
                     reject(error);
                 }

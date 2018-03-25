@@ -3,7 +3,7 @@ require('babel-register');
 const path = require('path');
 const open = require('open');
 
-const options = require('../options');
+const options = require('../config');
 
 // default options;
 let {
@@ -13,7 +13,7 @@ let {
 } = options;
 
 // переопределение порта нужно для heroku
-// теперь порядок приоритетов портов такой: 1. через переменную окружения, 2. через options.js, 3. значение по умолчанию
+// теперь порядок приоритетов портов такой: 1. через переменную окружения, 2. через config.js, 3. значение по умолчанию
 port = process.env.PORT || port;
 
 process.env.ROOT = myPath;
